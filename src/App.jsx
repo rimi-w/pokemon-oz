@@ -1,10 +1,7 @@
 import { Route, Routes } from "react-router-dom";
 import NavBar from "./pages/NavBar";
-import { lazy } from "react";
-import { Suspense } from "react";
+import { lazy, Suspense, useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { useSelector } from "react-redux";
-import { useEffect } from "react";
 import { fetchPokeDataById } from "./RTK/thunk";
 
 const Detail = lazy(() => import("./pages/Detail"));
@@ -14,7 +11,6 @@ const Search = lazy(() => import("./pages/Search"));
 
 function App() {
   const dispatch = useDispatch();
-  const pokeData = useSelector((state) => state.poke.data);
 
   useEffect(() => {
     dispatch(fetchPokeDataById(151));
