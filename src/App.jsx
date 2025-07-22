@@ -2,6 +2,10 @@ import { Route, Routes } from "react-router-dom";
 import NavBar from "./pages/NavBar";
 import { lazy } from "react";
 import { Suspense } from "react";
+import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
+import { useEffect } from "react";
+import { fetchPokeDataById } from "./RTK/thunk";
 
 const Detail = lazy(() => import("./pages/Detail"));
 const Favorites = lazy(() => import("./pages/Favorites"));
@@ -9,6 +13,13 @@ const Main = lazy(() => import("./pages/Main"));
 const Search = lazy(() => import("./pages/Search"));
 
 function App() {
+  const dispatch = useDispatch();
+  const pokeData = useSelector((state) => state.poke.data);
+
+  useEffect(() => {
+    dispatch(fetchPokeDataById(151));
+  }, []);
+
   return (
     <>
       <NavBar />
